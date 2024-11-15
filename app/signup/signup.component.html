@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+     
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(19, 18, 18, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
+        .form-group button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius:3px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .s{
+            font-size: large;
+        }
+        .form-error{
+  color: red;
+        }
+  
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Sign Up</h2>
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input formControlName="username" type="text" id="username" name="username" required>
+                @if (signupForm.get('username')?.hasError('required') && signupForm.get('username')?.touched){
+                    <div class="form-error">*Username is required</div>
+                    }
+                @if (signupForm.get('username')?.hasError('pattern') && signupForm.get('username')?.touched){
+                        <div class="form-error">*Username is Inavlid</div>
+                        }
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input formControlName="email" type="email" id="email" name="email" required>
+                <!-- @if (signupForm.get('email')?.hasError('required') && signupForm.get('email')?.touched){
+                    <div class="form-error">*Email is required</div>
+                    } -->
+                <div style="color: red;" *ngIf="signupForm.controls['email'].invalid  && (signupForm.controls['email'].touched || signupForm.controls['email'].dirty || isFormSubmitted)" class="error">
+                <span *ngIf="signupForm.controls['email'].errors?.['required']">*Invalid Email</span>
+                <span *ngIf="signupForm.controls['email'].errors?.['email']"> Email Is Not Proper </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input formControlName="password" type="password" id="password" name="password" required>
+                @if (signupForm.get('password')?.hasError('required') && signupForm.get('password')?.touched){
+                    <div class="form-error">*Password is required</div>
+                    }
+                <!-- <div style="color: red;" *ngIf="signupForm.controls['password'].invalid  && (signupForm.controls['password'].touched || signupForm.controls['password'].dirty || isFormSubmitted)" class="error">
+                <span *ngIf="signupForm.controls['password'].errors?.['required']">*Invalid Password</span>
+                </div> -->
+            </div>
+            <!-- <div class="form-group">
+                <label for="Confirm Password">Confirm Password</label>
+                <input formControlName="Confirm password" type="password" id="confirm_password" name="Confirm Password" required><br> 
+            </div> -->
+            <div class="form-group">
+                <button type="submit">Sign Up</button>
+            </div>
+        </form>
+        <div class="s">
+            <a href="signin">Already have an account? Sign In</a>     
+        </div>
+    </div>
+</body>
+</html>

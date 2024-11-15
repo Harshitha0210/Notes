@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes App</title>
+  <link rel="stylesheet" href="home.component.css">
+</head>
+<body>
+  <div>
+  <header class="header">
+    <h1>Welcome to Note Taker, </h1><!--@ UserManager.GetUserAsync(User)Result.UserName!--> 
+    <img src="assets/img3.jpeg" alt="notes">
+  </header>
+   <table class="table">
+    <thead>
+      <tr>
+        <!-- <th scope="col">NotesId</th> -->
+        <th scope="col">Title</th>
+        <th scope="col">Note</th>
+        <!-- <th scope="col">Email</th> -->
+      </tr>
+    </thead>
+    <tbody class="tableitems">
+      <tr *ngFor="let item of Notes">
+        
+        <!-- <td>{{item.notesId}}</td> -->
+        <td>{{item.title}}</td>
+        <td>{{item.note}}</td>
+        <!-- <td>{{item.email}}</td> -->
+        <button (click)="item.notesId && loadNote(item)" id="add-note" class="btn btn-primary">Edit</button>&nbsp;&nbsp;&nbsp;
+        <button (click)="deleteNote(item.notesId)" id="add-note" class="btn btn-primary">Delete</button>
+      </tr> 
+    </tbody>
+  </table> 
+  <div class="create">
+    <button id="add-note"><a style="text-decoration: none;color:white" href="new-note">Create Note</a></button>
+  </div>
+</div>
+</body>
+</html>
+
+<app-model [isOpen]="isModelOpen" (closeModel)="closeModel">
+  <app-new-note NotesId="editNote"  (onCloseModel)="closeModel()"[data]="Notess" ></app-new-note>
+</app-model>
+
